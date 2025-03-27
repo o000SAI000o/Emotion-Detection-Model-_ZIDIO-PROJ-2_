@@ -146,9 +146,9 @@ Absolutely! Let's break down how the frontend, backend, database, and API work t
 
 5. Deployment & Scaling
   Once development is complete, deploy using:
-  - 🚀 **Frontend**: Vercel, Netlify, or AWS Amplify
-  - 🚀 **Backend**: AWS EC2, Railway, or Render
-  - 🚀 **Database**: AWS RDS, Supabase, or ElephantSQL
+  -**Frontend**: Vercel, Netlify, or AWS Amplify
+  -**Backend**: AWS EC2, Railway, or Render
+  -**Database**: AWS RDS, Supabase, or ElephantSQL
 
 Would you like me to provide step-by-step setup guides for backend API development or frontend integration? 🚀
 
