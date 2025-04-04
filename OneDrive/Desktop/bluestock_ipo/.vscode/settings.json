@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "password": "$@!25",
+            "username": "SAI",
+            "database": "bluestock_postgres",
+            "name": "bluestock_db",
+            "group": "SDE_bluestock"
+        }
+    ]
+}

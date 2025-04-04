@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>API Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 10px;
+        }
+        .api-key {
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div style="width:800px;" class="container mt-4">
+    <h2 class="text-center">API Manager</h2>
+
+    <!-- API Keys Management -->
+    <div class="card p-3 mt-3">
+        <h5>API Keys Management</h5>
+        <button class="btn btn-primary mb-2" onclick="generateApiKey()">Generate API Key</button>
+        <ul class="list-group" id="apiKeyList">
+            <!-- API keys will be added here dynamically -->
+        </ul>
+    </div>
+
+    <!-- Usage Analytics -->
+    <div class="card p-3 mt-3">
+        <h5>Usage Analytics</h5>
+        <p><strong>API Requests:</strong> <span id="apiRequests">0</span></p>
+        <p><strong>Errors:</strong> <span id="apiErrors">0</span></p>
+        <button class="btn btn-info" onclick="simulateApiUsage()">Simulate API Request</button>
+    </div>
+
+    <!-- Access Controls -->
+    <div class="card p-3 mt-3">
+        <h5>Access Controls</h5>
+        <label for="userRole">Assign Role:</label>
+        <select id="userRole" class="form-select">
+            <option>Admin</option>
+            <option>Developer</option>
+            <option>Read-Only</option>
+        </select>
+        <button class="btn btn-success mt-2" onclick="assignRole()">Save Role</button>
+        <p class="mt-2"><strong>Current Role:</strong> <span id="currentRole">None</span></p>
+    </div>
+
+    <!-- Webhook Configuration -->
+    <div class="card p-3 mt-3">
+        <h5>Webhook Configuration</h5>
+        <input type="text" class="form-control mb-2" id="webhookUrl" placeholder="Enter Webhook URL">
+        <button class="btn btn-primary" onclick="addWebhook()">Add Webhook</button>
+        <ul class="list-group mt-2" id="webhookList">
+            <!-- Webhooks will be added here dynamically -->
+        </ul>
+    </div>
+</div>
+
+<script>
+    function generateApiKey() {
+        const apiKey = 'API-' + Math.random().toString(36).substr(2, 12).toUpperCase();
+        const listItem = document.createElement("li");
+        listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+        listItem.innerHTML = `<span class="api-key">${apiKey}</span>
+                              <button class="btn btn-danger btn-sm" onclick="deleteKey(this)">Delete</button>`;
+        document.getElementById("apiKeyList").appendChild(listItem);
+    }
+
+    function deleteKey(button) {
+        button.parentElement.remove();
+    }
+
+    function simulateApiUsage() {
+        let requests = parseInt(document.getElementById("apiRequests").innerText);
+        let errors = parseInt(document.getElementById("apiErrors").innerText);
+        document.getElementById("apiRequests").innerText = requests + 1;
+        if (Math.random() < 0.2) {
+            document.getElementById("apiErrors").innerText = errors + 1;
+        }
+    }
+
+    function assignRole() {
+        let role = document.getElementById("userRole").value;
+        document.getElementById("currentRole").innerText = role;
+    }
+
+    function addWebhook() {
+        let url = document.getElementById("webhookUrl").value;
+        if (url) {
+            const listItem = document.createElement("li");
+            listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+            listItem.innerHTML = `<span>${url}</span>
+                                  <button class="btn btn-danger btn-sm" onclick="deleteKey(this)">Remove</button>`;
+            document.getElementById("webhookList").appendChild(listItem);
+            document.getElementById("webhookUrl").value = "";
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
