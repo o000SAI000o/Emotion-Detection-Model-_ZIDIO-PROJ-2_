@@ -1,1 +1,0 @@
-//Sequelize models for data schema
